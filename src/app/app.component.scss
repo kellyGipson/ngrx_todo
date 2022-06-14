@@ -1,0 +1,12 @@
+@use '/src/styles.scss' as *;
+
+@mixin flexAndCentered($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin roundedCornersNrem($size) {
+  border-radius: $size;
+}

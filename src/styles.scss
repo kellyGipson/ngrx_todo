@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700;900&display=swap');
+
+$font: Roboto;
+$backgroundColor: #3b3b47;
+$fontColor: #eeeeee;
+$accentColor: #6c6cba;
+$accentColorDark: #52527a;
+
+* {
+  font-family: $font;
+}
+
+html, body {
+  width: 100vw;
+  margin: 0;
+}
+
+@media screen and (max-width: 190px) {
+  body {
+    word-break: break-all;
+  }
+}
+
+body {
+  color: $fontColor;
+  background-color: $backgroundColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

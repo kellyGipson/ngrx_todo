@@ -1,0 +1,45 @@
+<main>
+  <!-- Todo Header -->
+  <header>
+    <h1>Todo List With NgRx Integration</h1>
+    <button
+      (click)="toggleAddForm()"
+      class="btn"
+    >ADD TODO</button>
+    <form
+      *ngIf="addFormIsOpen"
+      [formGroup]="todoForm"
+      (ngSubmit)="onTodoSubmit()"
+    >
+      <div class="formElement">
+        <label for="formMessage">Message</label>
+        <input formControlName="formMessage" id="formMessage" type="text">
+      </div>
+      <button
+        class="btn"
+        type="submit"
+      >Submit</button>
+    </form>
+  </header>
+  <!-- Todo List -->
+  <section>
+    <div
+    *ngFor="let todo of todos"
+      class="todoContainer"
+    >
+      <p>{{todo.content}}</p>
+      <img
+        *ngIf="todo.checked"
+        class="checkMark"
+        src="/assets/check.svg"
+        alt="Completed"
+      >
+      <img
+        *ngIf="!todo.checked"
+        class="checkMark"
+        src="/assets/circle.svg"
+        alt="Todo"
+      >
+    </div>
+  </section>
+</main>
