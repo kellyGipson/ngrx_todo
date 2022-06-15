@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 import { Todo } from './todo.model';
+import { addTodo, deleteTodo, updateTodo, loadTodos } from 'src/app/state/todos/todos.actions';
+import { selectAllTodos } from 'src/app/state/todos/todos.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todo',
@@ -9,38 +13,50 @@ import { Todo } from './todo.model';
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-  todos: Todo[] = [
-    {
-      id: "1",
-      content: "hello world",
-      checked: false,
-    },
-    {
-      id: "2",
-      content: "something with a longer name like this that demontrates",
-      checked: true,
-    }
-  ];
+  allTodos$ = this.store.select(selectAllTodos);
 
   // Form variables
   addFormIsOpen: boolean = true;
-  todoForm = this.formBuilder.group({
-    formMessage: "",
-  })
+  formMessage!: string;
 
   constructor(
-    private formBuilder: FormBuilder
+    private store: Store,
   ) { }
 
   ngOnInit(): void {
+    this.store.dispatch(loadTodos());
   }
 
   toggleAddForm() {
     this.addFormIsOpen = !this.addFormIsOpen;
   }
 
+  toggleTodoChecked(todo: Todo) {
+    const newTodo: Todo = {
+      ...todo,
+      checked: !todo.checked
+    }
+    this.onUpdateTodo(newTodo);
+  }
+
   onTodoSubmit(): void {
-    console.log(this.todoForm.value);
+    console.log();
+    this.store.dispatch(
+      addTodo({ content: this.formMessage })
+    )
+    this.formMessage = "";
+  }
+
+  onDeleteTodo(todo: Todo): void {
+    this.store.dispatch(deleteTodo({ id: todo.id }));
+  }
+
+  onUpdateTodo(todo: Todo): void {
+    this.store.dispatch(updateTodo(todo));
+  }
+
+  debug(string: string) {
+    console.log(string)
   }
 
 }

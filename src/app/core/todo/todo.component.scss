@@ -22,10 +22,11 @@
 }
 
 .checkMark {
-  height: 1rem;
-  width: 1rem;
+  height: 1.5rem;
+  width: 1.5rem;
   fill: $fontColor;
   cursor: pointer;
+  margin-left: 0.5rem;
 }
 
 main {
@@ -38,7 +39,7 @@ main {
     text-align: center;
   }
 
-  header button {
+  header > button {
     width: 100%;
   }
 
@@ -54,15 +55,30 @@ main {
     align-items: center;
   }
 
+  .todoContainer div {
+    @include flexAndCentered(row);
+  }
+
+  form {
+    width: 100%;
+  }
+
+  .submitBtn {
+    width: 60%;
+  }
+
   .formElement {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding-block: 1rem;
     text-align: start;
+    width: 80%;
+    margin-inline: auto;
   }
 
   label[for="formMessage"] {
     padding-bottom: 0.5rem;
+    width: 100%;
   }
 
   #formMessage {
